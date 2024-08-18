@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Nasa Image Search 2.0</string>
+    <string name="app_title">Welcome to NASA Image Search</string>
+    <string name="landing_description">Find stunning images of space by selecting a date.</string>
+    <string name="start_button_text">Get Started</string>
+    <string name="header_title">Explore the Cosmos</string>
+    <string name="pick_a_date">Pick a Date</string>
+    <string name="calendar_icon">Calendar Icon</string>
+
+</resources>
