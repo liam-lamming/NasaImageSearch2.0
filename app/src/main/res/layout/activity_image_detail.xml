@@ -32,8 +32,29 @@
             android:id="@+id/dateTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingBottom="16dp"
+            android:paddingBottom="8dp"
             android:text="Date Placeholder" />
+
+        <!-- Explanation -->
+        <TextView
+            android:id="@+id/explanationTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:paddingBottom="16dp"
+            android:text="Explanation Placeholder"
+            android:layout_marginBottom="8dp"/>
+
+        <!-- Copyright -->
+        <TextView
+            android:id="@+id/copyrightTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textStyle="italic"
+            android:paddingBottom="16dp"
+            android:text="Copyright Placeholder"
+            android:layout_marginBottom="16dp"/>
 
         <!-- Buttons for Back and Save -->
         <LinearLayout

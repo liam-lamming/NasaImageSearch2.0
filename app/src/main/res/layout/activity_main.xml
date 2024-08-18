@@ -29,9 +29,10 @@
         android:id="@+id/btnPickDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/pick_a_date"
+        android:text="@string/select_a_date"
         android:drawableLeft="@drawable/ic_calendar"
         android:drawablePadding="10dp"
+        android:backgroundTint="@color/purple_500"
         android:textColor="@android:color/white"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/header_text"
@@ -40,7 +41,7 @@
         android:layout_marginEnd="16dp"
         android:padding="12dp"
         android:elevation="4dp"
-        />
+        android:background="@drawable/rounded_button_background"/>
 
     <!-- ProgressBar -->
     <ProgressBar
@@ -49,13 +50,15 @@
         android:layout_height="wrap_content"
         android:visibility="gone"
         android:layout_centerHorizontal="true"
-        android:layout_below="@id/btnPickDate" />
+        android:layout_below="@id/btnPickDate"
+        android:layout_marginTop="16dp"/>
 
     <!-- ListView for displaying results -->
     <ListView
         android:id="@+id/listView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/progressBar" />
+        android:layout_below="@id/progressBar"
+        android:layout_marginTop="16dp" />
 
 </RelativeLayout>
