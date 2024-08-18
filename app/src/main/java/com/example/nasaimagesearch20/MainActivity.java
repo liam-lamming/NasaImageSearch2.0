@@ -15,6 +15,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.gson.Gson;
+
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -33,10 +34,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        pickDateButton = findViewById(R.id.btnPickDate);
+        // Initialize UI elements
+        pickDateButton = findViewById(R.id.btnPickDate);  // Button for picking a date
         progressBar = findViewById(R.id.progressBar);
         listView = findViewById(R.id.listView);
 
+        // Set the Button's click listener to trigger DatePickerDialog and search functionality
         pickDateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -45,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    // Method to show DatePickerDialog
     private void showDatePickerDialog() {
         Calendar calendar = Calendar.getInstance();
         DatePickerDialog datePickerDialog = new DatePickerDialog(
@@ -53,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                         String selectedDate = year + "-" + (month + 1) + "-" + dayOfMonth;
-                        fetchNasaImage(selectedDate);
+                        fetchNasaImage(selectedDate); // Fetch the NASA image for the selected date
                     }
                 },
                 calendar.get(Calendar.YEAR),
@@ -63,16 +67,18 @@ public class MainActivity extends AppCompatActivity {
         datePickerDialog.show();
     }
 
+    // Method to initiate fetching the NASA image
     private void fetchNasaImage(String date) {
-        new FetchImageTask().execute(date);
+        new FetchImageTask().execute(date); // Execute the AsyncTask
     }
 
+    // AsyncTask to fetch the NASA image in the background
     private class FetchImageTask extends AsyncTask<String, Void, NasaImage> {
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            progressBar.setVisibility(View.VISIBLE);
+            progressBar.setVisibility(View.VISIBLE); // Show progress while loading data
         }
 
         @Override
@@ -94,26 +100,28 @@ public class MainActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-            return null;
+            return null; // Return null in case of failure
         }
 
         @Override
         protected void onPostExecute(NasaImage result) {
-            progressBar.setVisibility(View.GONE);
+            progressBar.setVisibility(View.GONE); // Hide progress bar
+
             if (result != null) {
-                displayNasaImage(result);
+                displayNasaImage(result); // Display the fetched image data
             } else {
-                Toast.makeText(MainActivity.this, "Error fetching data", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "Error fetching data", Toast.LENGTH_SHORT).show(); // Show error message
             }
         }
     }
 
+    // Method to display the fetched NASA image in a new activity
     private void displayNasaImage(NasaImage image) {
         Intent intent = new Intent(MainActivity.this, ImageDetailActivity.class);
         intent.putExtra("image_url", image.url);
         intent.putExtra("image_hdurl", image.hdurl);
         intent.putExtra("image_title", image.title);
         intent.putExtra("image_date", image.date);
-        startActivity(intent);
+        startActivity(intent); // Start ImageDetailActivity to display the image
     }
 }

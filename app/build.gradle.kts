@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.android.application)
+
 }
 
 android {
@@ -44,7 +45,8 @@ dependencies {
     implementation(libs.gson)
     implementation(libs.picasso)
     implementation(libs.cardview)
-
+    implementation(libs.glide)
+//    kapt("com.github.bumptech.glide:compiler:4.14.2") // Change this to kapt
 
 
 }

@@ -1,0 +1,19 @@
+<resources>
+    <!-- Base application theme -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here -->
+        <item name="colorPrimary">#7B68EE</item>
+        <item name="colorPrimaryDark">#6A5ACD</item>
+        <item name="colorAccent">#7B68EE</item>
+        <item name="buttonStyle">@style/CustomButton</item>
+
+    </style>
+
+    <!-- Define a custom button style -->
+    <style name="CustomButton" parent="Widget.AppCompat.Button">
+        <item name="android:backgroundTint">#7B68EE</item> <!-- Custom purple color -->
+        <item name="android:textColor">@android:color/white</item> <!-- White text -->
+        <item name="android:elevation">4dp</item> <!-- Button elevation for depth -->
+        <item name="android:padding">12dp</item> <!-- Consistent padding -->
+    </style>
+</resources>

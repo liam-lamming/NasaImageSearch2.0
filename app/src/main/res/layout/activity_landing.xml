@@ -6,27 +6,23 @@
     android:padding="16dp">
 
     <TextView
-        android:id="@+id/landing_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/app_title"
         android:textSize="24sp"
         android:textStyle="bold"
-        android:paddingBottom="16dp"/>
+        android:paddingBottom="16dp" />
 
     <TextView
-        android:id="@+id/landing_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/landing_description"
         android:textSize="16sp"
-        android:paddingBottom="24dp"/>
+        android:paddingBottom="24dp" />
 
     <Button
         android:id="@+id/start_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/start_button_text"
-        android:onClick="onStartButtonClick"/>
-
+        android:text="@string/start_button_text" />
 </LinearLayout>

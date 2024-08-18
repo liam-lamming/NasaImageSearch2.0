@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">Recherche d'images de la NASA 2.0</string>
-    <string name="app_title">Bienvenue dans la recherche d'images de la NASA</string>
+    <string name="header_title">Explorez le Cosmos</string>
     <string name="landing_description">Découvrez des images époustouflantes de l'espace en sélectionnant une date.</string>
     <string name="start_button_text">Commencer</string>
+    <string name="pick_a_date">Choisissez une date</string>
+    <string name="calendar_icon">Icône du calendrier</string>
+    <string name="search">Chercher</string>
 </resources>
