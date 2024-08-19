@@ -46,6 +46,7 @@ dependencies {
     implementation(libs.picasso)
     implementation(libs.cardview)
     implementation(libs.glide)
+
 //    kapt("com.github.bumptech.glide:compiler:4.14.2") // Change this to kapt
 
 

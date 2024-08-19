@@ -2,6 +2,8 @@
     package="com.example.nasaimagesearch20">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -25,6 +27,8 @@
             android:windowSoftInputMode="adjustPan"
         />
         <activity android:name=".ImageDetailActivity" android:exported="true" />
+        <activity android:name=".SavedImagesActivity" />
+
 
     </application>
 </manifest>

@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
@@ -28,6 +29,7 @@ import java.util.GregorianCalendar;
 public class MainActivity extends AppCompatActivity {
 
     private Button pickDateButton;
+    private Button viewSavedImagesButton;
     private ProgressBar progressBar;
     private ListView listView;
     private ArrayList<NasaImage> nasaImages = new ArrayList<>();
@@ -38,8 +40,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Setup the toolbar
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
         // Initialize UI elements
         pickDateButton = findViewById(R.id.btnPickDate);
+        viewSavedImagesButton = findViewById(R.id.btnViewSavedImages);
         progressBar = findViewById(R.id.progressBar);
         listView = findViewById(R.id.listView);
 
@@ -48,17 +55,18 @@ public class MainActivity extends AppCompatActivity {
         listView.setAdapter(adapter);
 
         // Set the Button's click listener to trigger DatePickerDialog and search functionality
-        pickDateButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showDatePickerDialog();
-            }
-        });
+        pickDateButton.setOnClickListener(v -> showDatePickerDialog());
 
         // Handle item clicks in ListView to show detailed information
         listView.setOnItemClickListener((parent, view, position, id) -> {
             NasaImage selectedImage = nasaImages.get(position);
-            displayNasaImage(selectedImage);  // Use method to display image details
+            displayNasaImage(selectedImage);
+        });
+
+        // Set click listener for the View Saved Images button
+        viewSavedImagesButton.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, SavedImagesActivity.class);
+            startActivity(intent);
         });
     }
 
@@ -84,6 +92,7 @@ public class MainActivity extends AppCompatActivity {
         datePickerDialog.getDatePicker().setMinDate(new GregorianCalendar(1995, Calendar.JUNE, 16).getTimeInMillis());
         // Set the end date of the picker to today's date
         datePickerDialog.getDatePicker().setMaxDate(calendar.getTimeInMillis());
+
         // Show the DatePickerDialog
         datePickerDialog.show();
     }
@@ -147,8 +156,8 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("image_hdurl", image.getHdurl());
         intent.putExtra("image_title", image.getTitle());
         intent.putExtra("image_date", image.getDate());
-        intent.putExtra("image_explanation", image.getExplanation());  // Pass explanation
-        intent.putExtra("image_copyright", image.getCopyright());      // Pass copyright
-        startActivity(intent); // Start ImageDetailActivity to display the image
+        intent.putExtra("image_explanation", image.getExplanation());
+        intent.putExtra("image_copyright", image.getCopyright());
+        startActivity(intent);
     }
 }

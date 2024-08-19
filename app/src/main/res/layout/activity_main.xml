@@ -12,6 +12,16 @@
         android:src="@drawable/space_background3"
         android:adjustViewBounds="true" />
 
+    <!-- Toolbar -->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        android:elevation="4dp"
+        android:layout_alignParentTop="true" />
+
     <!-- Header Text -->
     <TextView
         android:id="@+id/header_text"
@@ -22,26 +32,46 @@
         android:textSize="32sp"
         android:textStyle="bold"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp" />
+        android:layout_marginTop="50dp"
+        android:layout_below="@id/toolbar" />
 
-    <!-- Pick a Date Button -->
-    <Button
-        android:id="@+id/btnPickDate"
+    <!-- Horizontal LinearLayout for buttons -->
+    <LinearLayout
+        android:id="@+id/button_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/select_a_date"
-        android:drawableLeft="@drawable/ic_calendar"
-        android:drawablePadding="10dp"
-        android:backgroundTint="@color/purple_500"
-        android:textColor="@android:color/white"
-        android:layout_centerHorizontal="true"
         android:layout_below="@id/header_text"
-        android:layout_marginTop="24dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:padding="12dp"
-        android:elevation="4dp"
-        android:background="@drawable/rounded_button_background"/>
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal"
+        android:layout_marginTop="24dp">
+
+        <!-- Pick a Date Button -->
+        <Button
+            android:id="@+id/btnPickDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/select_a_date"
+            android:drawableLeft="@drawable/ic_calendar"
+            android:drawablePadding="10dp"
+            android:backgroundTint="@color/purple_500"
+            android:textColor="@android:color/white"
+            android:padding="12dp"
+            android:elevation="4dp"
+            android:background="@drawable/rounded_button_background" />
+
+        <!-- View Saved Images Button -->
+        <Button
+            android:id="@+id/btnViewSavedImages"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="View Saved Images"
+            android:padding="12dp"
+            android:backgroundTint="@color/purple_500"
+            android:textColor="@android:color/white"
+            android:layout_marginStart="16dp"
+            android:elevation="4dp"
+            android:background="@drawable/rounded_button_background" />
+    </LinearLayout>
 
     <!-- ProgressBar -->
     <ProgressBar
@@ -50,8 +80,8 @@
         android:layout_height="wrap_content"
         android:visibility="gone"
         android:layout_centerHorizontal="true"
-        android:layout_below="@id/btnPickDate"
-        android:layout_marginTop="16dp"/>
+        android:layout_below="@id/button_layout"
+        android:layout_marginTop="16dp" />
 
     <!-- ListView for displaying results -->
     <ListView
