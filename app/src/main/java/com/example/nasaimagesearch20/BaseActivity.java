@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentManager;
@@ -18,13 +19,22 @@ public class BaseActivity extends AppCompatActivity {
     }
 
     // Method to set up the toolbar and make it reusable in all activities
-    protected void setUpToolbar(int layoutResID) {
+    protected void setUpToolbar(int layoutResID, boolean showBackButton) {
         setContentView(layoutResID);
 
         // Set up the toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
         if (toolbar != null) {
             setSupportActionBar(toolbar);
+        }
+
+        // Enable the back button in the toolbar if required
+        if (showBackButton) {
+            ActionBar actionBar = getSupportActionBar();
+            if (actionBar != null) {
+                actionBar.setDisplayHomeAsUpEnabled(true);
+                actionBar.setHomeAsUpIndicator(R.drawable.ic_arrow_back);  // Custom back icon
+            }
         }
     }
 
@@ -39,7 +49,11 @@ public class BaseActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle menu item selections
         int id = item.getItemId();
-        if (id == R.id.action_help) {
+        if (id == android.R.id.home) {
+            // Handle the back button press in the toolbar
+            onBackPressed();
+            return true;
+        } else if (id == R.id.action_help) {
             showHelpDialog();
             return true;
         } else if (id == R.id.action_settings) {

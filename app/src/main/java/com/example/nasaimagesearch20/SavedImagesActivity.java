@@ -21,7 +21,7 @@ public class SavedImagesActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
 
         // Set up layout and toolbar
-        setUpToolbar(R.layout.activity_saved_images);
+        setUpToolbar(R.layout.activity_saved_images, true);
 
         // Initialize GridView for displaying saved images
         savedImagesGridView = findViewById(R.id.savedImagesGridView);

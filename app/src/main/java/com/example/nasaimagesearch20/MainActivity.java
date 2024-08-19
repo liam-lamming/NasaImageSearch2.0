@@ -42,7 +42,7 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
 
         // Set up layout and toolbar
-        setUpToolbar(R.layout.activity_main);
+        setUpToolbar(R.layout.activity_main, true);
 
         // Initialize UI elements
         pickDateButton = findViewById(R.id.btnPickDate);

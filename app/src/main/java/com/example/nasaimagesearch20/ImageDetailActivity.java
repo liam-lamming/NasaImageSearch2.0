@@ -42,7 +42,9 @@ public class ImageDetailActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
 
         // Set up the toolbar using BaseActivity's method
-        setUpToolbar(R.layout.activity_image_detail);
+        setUpToolbar(R.layout.activity_image_detail, true); // Passing true to show the back button
+
+
 
         // Initialize UI elements
         imageView = findViewById(R.id.imageView);
@@ -50,7 +52,7 @@ public class ImageDetailActivity extends BaseActivity {
         dateTextView = findViewById(R.id.dateTextView);
         explanationTextView = findViewById(R.id.explanationTextView);
         copyrightTextView = findViewById(R.id.copyrightTextView);
-        backButton = findViewById(R.id.backButton);
+//        backButton = findViewById(R.id.backButton);
         saveButton = findViewById(R.id.saveButton);
 
         // Retrieve data from the intent
@@ -71,7 +73,7 @@ public class ImageDetailActivity extends BaseActivity {
         loadImage();
 
         // Back Button: Navigate back to the previous activity
-        backButton.setOnClickListener(v -> finish());
+//        backButton.setOnClickListener(v -> finish());
 
         // Save Button: Save the image to the device
         saveButton.setOnClickListener(v -> saveImageToDevice());
