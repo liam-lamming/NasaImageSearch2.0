@@ -4,6 +4,8 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
@@ -11,8 +13,8 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
@@ -26,7 +28,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     private Button pickDateButton;
     private Button viewSavedImagesButton;
@@ -38,11 +40,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
 
-        // Setup the toolbar
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        // Set up layout and toolbar
+        setUpToolbar(R.layout.activity_main);
 
         // Initialize UI elements
         pickDateButton = findViewById(R.id.btnPickDate);
@@ -68,6 +68,32 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this, SavedImagesActivity.class);
             startActivity(intent);
         });
+    }
+
+    // Inflate the toolbar menu
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.toolbar_menu, menu);
+        return true;
+    }
+
+    // Handle toolbar menu item clicks
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_help) {
+            // Show help fragment with specific information for MainActivity
+            showHelpFragment("To search for a NASA image, select the date and hit OK! You can also view saved images by clicking on 'View Saved Images'.");
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    // Method to show the help fragment
+    private void showHelpFragment(String helpText) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        HelpFragment helpFragment = HelpFragment.newInstance(helpText);
+        helpFragment.show(fragmentManager, "HelpFragment");
     }
 
     // Method to show DatePickerDialog

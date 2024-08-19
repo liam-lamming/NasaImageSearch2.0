@@ -1,85 +1,109 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="16dp">
+    android:layout_height="match_parent">
 
-    <LinearLayout
+    <!-- Toolbar -->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:popupTheme="@style/CustomPopupMenu"
+        android:elevation="4dp"
+        android:layout_alignParentTop="true" />
 
-        <!-- NASA Image -->
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scaleType="fitCenter"
-            android:contentDescription="NASA Image" />
+    <!-- ScrollView for the content -->
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbar"
+        android:padding="16dp">
 
-        <!-- Title -->
-        <TextView
-            android:id="@+id/titleTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:paddingTop="16dp"
-            android:paddingBottom="8dp"
-            android:text="Title Placeholder" />
-
-        <!-- Date -->
-        <TextView
-            android:id="@+id/dateTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingBottom="8dp"
-            android:text="Date Placeholder" />
-
-        <!-- Explanation -->
-        <TextView
-            android:id="@+id/explanationTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:paddingBottom="16dp"
-            android:text="Explanation Placeholder"
-            android:layout_marginBottom="8dp"/>
-
-        <!-- Copyright -->
-        <TextView
-            android:id="@+id/copyrightTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="14sp"
-            android:textStyle="italic"
-            android:paddingBottom="16dp"
-            android:text="Copyright Placeholder"
-            android:layout_marginBottom="16dp"/>
-
-        <!-- Buttons for Back and Save -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_horizontal"
-            android:padding="16dp">
+            android:orientation="vertical">
 
-            <!-- Back Button -->
-            <Button
-                android:id="@+id/backButton"
+            <!-- NASA Image -->
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scaleType="fitCenter"
+                android:contentDescription="NASA Image"
+                android:src="@drawable/placeholder_image" />
+
+            <!-- Title -->
+            <TextView
+                android:id="@+id/titleTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Back" />
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:paddingTop="16dp"
+                android:paddingBottom="8dp"
+                android:text="Title Placeholder" />
 
-            <!-- Save Button -->
-            <Button
-                android:id="@+id/saveButton"
+            <!-- Date -->
+            <TextView
+                android:id="@+id/dateTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Save"
-                android:layout_marginStart="16dp" />
+                android:paddingBottom="8dp"
+                android:text="Date Placeholder" />
+
+            <!-- Explanation -->
+            <TextView
+                android:id="@+id/explanationTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:paddingBottom="16dp"
+                android:text="Explanation Placeholder"
+                android:layout_marginBottom="8dp" />
+
+            <!-- Copyright -->
+            <TextView
+                android:id="@+id/copyrightTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textStyle="italic"
+                android:paddingBottom="16dp"
+                android:text="Copyright Placeholder"
+                android:layout_marginBottom="16dp" />
+
+            <!-- Buttons for Back and Save -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_horizontal"
+                android:padding="16dp">
+
+                <!-- Back Button -->
+                <Button
+                    android:id="@+id/backButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Back"
+                    android:background="@drawable/rounded_button_background" />
+
+                <!-- Save Button -->
+                <Button
+                    android:id="@+id/saveButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:text="Save"
+                    android:background="@drawable/rounded_button_background" />
+
+            </LinearLayout>
 
         </LinearLayout>
+    </ScrollView>
 
-    </LinearLayout>
-</ScrollView>
+</RelativeLayout>

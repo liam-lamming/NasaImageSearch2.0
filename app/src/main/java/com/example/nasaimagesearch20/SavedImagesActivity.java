@@ -1,10 +1,9 @@
 package com.example.nasaimagesearch20;
 
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.AdapterView;
+import android.view.MenuItem;
 import android.widget.GridView;
 import android.widget.Toast;
 
@@ -14,7 +13,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SavedImagesActivity extends AppCompatActivity {
+public class SavedImagesActivity extends BaseActivity {
 
     private GridView savedImagesGridView;
     private List<File> savedImageFiles;
@@ -23,8 +22,11 @@ public class SavedImagesActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_saved_images);
 
+        // Set up layout and toolbar
+        setUpToolbar(R.layout.activity_saved_images);
+
+        // Initialize GridView for displaying saved images
         savedImagesGridView = findViewById(R.id.savedImagesGridView);
 
         // Load saved images from the device
@@ -89,5 +91,22 @@ public class SavedImagesActivity extends AppCompatActivity {
                 Toast.makeText(this, "Failed to delete image", Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+    // Method to display the help fragment with detailed instructions for this page
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.action_help) {
+            // Show the help fragment specific to SavedImagesActivity
+            showHelpFragment("This page displays all your saved NASA images. You can view the images by clicking on them, or delete them by holding the image and confirming the deletion.");
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    // Method to show the help fragment
+    private void showHelpFragment(String helpText) {
+        HelpFragment helpFragment = HelpFragment.newInstance(helpText);
+        helpFragment.show(getSupportFragmentManager(), "HelpFragment");
     }
 }

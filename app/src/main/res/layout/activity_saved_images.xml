@@ -1,17 +1,43 @@
-<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!-- Toolbar at the top -->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+
+        android:elevation="4dp"
+        android:layout_alignParentTop="true"
+        app:popupTheme="@style/CustomPopupMenu"
+    />
 
     <!-- GridView to display saved images -->
     <GridView
         android:id="@+id/savedImagesGridView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:numColumns="2"
         android:verticalSpacing="8dp"
         android:horizontalSpacing="8dp"
         android:gravity="center"
-        android:padding="8dp" />
+        android:padding="8dp"
+        android:layout_below="@id/toolbar" />
+
+    <!-- Help TextView -->
+    <TextView
+        android:id="@+id/activityMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:textColor="@android:color/black"
+        android:padding="16dp"
+        android:textSize="16sp"
+        android:visibility="gone"
+        android:text="This is a help message for using the Saved Images screen." />
 
 </RelativeLayout>

@@ -1,17 +1,16 @@
 package com.example.nasaimagesearch20;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.view.View;
+import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.CustomTarget;
@@ -20,7 +19,7 @@ import com.bumptech.glide.request.transition.Transition;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-public class ImageDetailActivity extends AppCompatActivity {
+public class ImageDetailActivity extends BaseActivity {
 
     private ImageView imageView;
     private TextView titleTextView;
@@ -41,7 +40,9 @@ public class ImageDetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_image_detail);
+
+        // Set up the toolbar using BaseActivity's method
+        setUpToolbar(R.layout.activity_image_detail);
 
         // Initialize UI elements
         imageView = findViewById(R.id.imageView);
@@ -67,6 +68,17 @@ public class ImageDetailActivity extends AppCompatActivity {
         copyrightTextView.setText(imageCopyright != null ? "© " + imageCopyright : "Public Domain");
 
         // Load the image using Glide
+        loadImage();
+
+        // Back Button: Navigate back to the previous activity
+        backButton.setOnClickListener(v -> finish());
+
+        // Save Button: Save the image to the device
+        saveButton.setOnClickListener(v -> saveImageToDevice());
+    }
+
+    // Method to load the image using Glide
+    private void loadImage() {
         Glide.with(this)
                 .asBitmap()
                 .load(imageUrl)
@@ -79,28 +91,28 @@ public class ImageDetailActivity extends AppCompatActivity {
 
                     @Override
                     public void onLoadCleared(@Nullable android.graphics.drawable.Drawable placeholder) {
-                        // This is called when the image view is cleared, handle any cleanup here if necessary
+                        // Cleanup when image view is cleared
+                    }
+
+                    @Override
+                    public void onLoadFailed(@Nullable android.graphics.drawable.Drawable errorDrawable) {
+                        // Handle image load failure
+                        Toast.makeText(ImageDetailActivity.this, "Failed to load image", Toast.LENGTH_SHORT).show();
                     }
                 });
-
-        // Back Button: Navigate back to the MainActivity
-        backButton.setOnClickListener(v -> finish());
-
-        // Save Button: Save the image to the device
-        saveButton.setOnClickListener(v -> saveImageToDevice());
     }
 
     // Save the image to the device storage
     private void saveImageToDevice() {
         if (imageBitmap != null) {
             try {
-                // Use a unique filename based on title and date
-                String filename = imageTitle + "_" + imageDate + ".png";
+                // Sanitize and create a unique filename based on the title and date
+                String filename = sanitizeFilename(imageTitle + "_" + imageDate + ".png");
                 FileOutputStream outputStream = openFileOutput(filename, Context.MODE_PRIVATE);
                 imageBitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream);
                 outputStream.close();
 
-                Toast.makeText(this, "Image saved!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Image saved as " + filename, Toast.LENGTH_SHORT).show();
             } catch (IOException e) {
                 e.printStackTrace();
                 Toast.makeText(this, "Failed to save image.", Toast.LENGTH_SHORT).show();
@@ -108,5 +120,29 @@ public class ImageDetailActivity extends AppCompatActivity {
         } else {
             Toast.makeText(this, "Image not loaded yet.", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    // Helper method to sanitize filenames by removing invalid characters
+    private String sanitizeFilename(String filename) {
+        return filename.replaceAll("[^a-zA-Z0-9._-]", "_");
+    }
+
+    // Method to display the help fragment with detailed instructions
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.action_help) {
+            // Show the help fragment specific to ImageDetailActivity
+            showHelpFragment("This page displays information about your selected NASA image " +
+                    "You can save the image to your device by clicking the 'Save' button or return to the previous page using the 'Back' button.");
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    // Method to show the help fragment
+    private void showHelpFragment(String helpText) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        HelpFragment helpFragment = HelpFragment.newInstance(helpText);
+        helpFragment.show(fragmentManager, "HelpFragment");
     }
 }

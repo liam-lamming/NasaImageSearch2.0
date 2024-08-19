@@ -1,0 +1,24 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!-- Help Icon -->
+    <item
+        android:id="@+id/action_help"
+        android:title="Help"
+        android:icon="@drawable/ic_help_outline"
+        app:showAsAction="always" />
+
+    <!-- Settings Icon -->
+    <item
+        android:id="@+id/action_settings"
+        android:title="Settings"
+        android:icon="@drawable/ic_settings"
+        app:showAsAction="never" />
+
+    <!-- Refresh Icon -->
+    <item
+        android:id="@+id/action_refresh"
+        android:title="Refresh"
+        android:icon="@drawable/ic_refresh"
+        app:showAsAction="never" />
+</menu>

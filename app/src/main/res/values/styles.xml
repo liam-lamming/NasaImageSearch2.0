@@ -16,4 +16,8 @@
         <item name="android:elevation">4dp</item> <!-- Button elevation for depth -->
         <item name="android:padding">12dp</item> <!-- Consistent padding -->
     </style>
+    <style name="CustomPopupMenu" parent="ThemeOverlay.AppCompat.Light">
+        <item name="android:background">@color/purple_1</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
 </resources>
