@@ -1,13 +1,10 @@
 package com.example.nasaimagesearch20;
 
 import android.app.AlertDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.GridView;
 import android.widget.Toast;
-
-import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -38,11 +35,9 @@ public class SavedImagesActivity extends BaseActivity {
 
         // Set up click listener for viewing saved images
         savedImagesGridView.setOnItemClickListener((parent, view, position, id) -> {
-            // Handle the viewing of the saved image
+            // Handle the image enlargement by triggering a fragment
             File selectedImageFile = savedImageFiles.get(position);
-            Intent intent = new Intent(SavedImagesActivity.this, ImageDetailActivity.class);
-            intent.putExtra("image_path", selectedImageFile.getAbsolutePath());
-            startActivity(intent);
+            showImageInFragment(selectedImageFile);
         });
 
         // Long-click listener for deleting saved images
@@ -108,5 +103,12 @@ public class SavedImagesActivity extends BaseActivity {
     private void showHelpFragment(String helpText) {
         HelpFragment helpFragment = HelpFragment.newInstance(helpText);
         helpFragment.show(getSupportFragmentManager(), "HelpFragment");
+    }
+
+    // Method to display the selected image in a fragment for enlargement
+    private void showImageInFragment(File imageFile) {
+        // Create and show the fragment to enlarge the image
+        FullscreenImageFragment fragment = FullscreenImageFragment.newInstance(imageFile.getAbsolutePath());
+        fragment.show(getSupportFragmentManager(), "ImageViewerFragment");
     }
 }
