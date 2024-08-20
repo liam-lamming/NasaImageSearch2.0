@@ -43,6 +43,10 @@ dependencies {
     implementation(libs.cardview)
     implementation(libs.glide)
     implementation("com.github.chrisbanes:PhotoView:2.3.0")
+    implementation ("androidx.preference:preference:1.1.1")
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+    implementation(libs.logging.interceptor)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)

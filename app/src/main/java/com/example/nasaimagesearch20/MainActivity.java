@@ -8,13 +8,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.Toolbar;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
@@ -27,86 +28,111 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 public class MainActivity extends BaseActivity {
 
     private Button pickDateButton;
     private Button viewSavedImagesButton;
     private ProgressBar progressBar;
-    private ListView listView;
-    private ArrayList<NasaImage> nasaImages = new ArrayList<>();
+    private RecyclerView recyclerView;
+    private List<NasaImage> nasaImages = new ArrayList<>();
     private NASAImageAdapter adapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Set up layout and toolbar
-        setUpToolbar(R.layout.activity_main, true);
+        // Set the layout for the activity and initialize the toolbar
+        setUpToolbar(R.layout.activity_main, false);
 
         // Initialize UI elements
         pickDateButton = findViewById(R.id.btnPickDate);
         viewSavedImagesButton = findViewById(R.id.btnViewSavedImages);
         progressBar = findViewById(R.id.progressBar);
-        listView = findViewById(R.id.listView);
+        recyclerView = findViewById(R.id.recycler_view);
 
-        // Set up the adapter for ListView
+        // Set up the RecyclerView and Adapter
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new NASAImageAdapter(this, nasaImages);
-        listView.setAdapter(adapter);
+        recyclerView.setAdapter(adapter);
 
         // Set the Button's click listener to trigger DatePickerDialog and search functionality
         pickDateButton.setOnClickListener(v -> showDatePickerDialog());
 
-        // Handle item clicks in ListView to show detailed information
-        listView.setOnItemClickListener((parent, view, position, id) -> {
-            NasaImage selectedImage = nasaImages.get(position);
-            displayNasaImage(selectedImage);
-        });
+        // Handle RecyclerView item clicks to show detailed information about the selected image
+        adapter.setOnItemClickListener(position -> displayNasaImage(nasaImages.get(position)));
 
-        // Set click listener for the View Saved Images button
+        // Set click listener for View Saved Images button
         viewSavedImagesButton.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, SavedImagesActivity.class);
             startActivity(intent);
         });
     }
 
-    // Inflate the toolbar menu
+    // Inflate the toolbar menu and set up the SearchView
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.toolbar_menu, menu);
+        getMenuInflater().inflate(R.menu.toolbar_menu, menu); // Reference the correct menu resource
+
+        // Configure the SearchView
+        MenuItem searchItem = menu.findItem(R.id.action_search);
+        SearchView searchView = (SearchView) searchItem.getActionView();
+        searchView.setQueryHint("Search by date");
+
+        // Handle search query submission
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                // Trigger the NASA image search based on the date entered in the search view
+                fetchNasaImage(query);
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                // Optionally handle real-time text changes
+                return false;
+            }
+        });
+
         return true;
     }
 
-    // Handle toolbar menu item clicks
+    // Handle menu item selections
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.action_help) {
-            // Show help fragment with specific information for MainActivity
-            showHelpFragment("To search for a NASA image, select the date and hit OK! You can also view saved images by clicking on 'View Saved Images'.");
-            return true;
+        switch (item.getItemId()) {
+            case R.id.action_help:
+                // Show help fragment for MainActivity
+                showHelpFragment("Select a date to explore NASA images. You can also access your saved images by tapping 'Saved Images'");
+                return true;
+            case R.id.action_settings:
+                // Handle settings if needed
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-        return super.onOptionsItemSelected(item);
     }
 
-    // Method to show the help fragment
+    // Display the help fragment with specific information for this activity
     private void showHelpFragment(String helpText) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         HelpFragment helpFragment = HelpFragment.newInstance(helpText);
         helpFragment.show(fragmentManager, "HelpFragment");
     }
 
-    // Method to show DatePickerDialog
+    // Show the DatePickerDialog to allow the user to pick a date for searching NASA images
     private void showDatePickerDialog() {
         Calendar calendar = Calendar.getInstance();
 
-        // Create a DatePickerDialog with spinner mode for easier year and month selection
+        // Configure DatePickerDialog with the available date range
         DatePickerDialog datePickerDialog = new DatePickerDialog(
                 this,
                 android.R.style.Theme_Holo_Light_Dialog_NoActionBar,
                 (view, year, month, dayOfMonth) -> {
                     String selectedDate = year + "-" + (month + 1) + "-" + dayOfMonth;
-                    pickDateButton.setText(selectedDate);  // Set the selected date on the button
+                    pickDateButton.setText(selectedDate);  // Display the selected date on the button
                     fetchNasaImage(selectedDate);  // Fetch the NASA image for the selected date
                 },
                 calendar.get(Calendar.YEAR),
@@ -114,16 +140,15 @@ public class MainActivity extends BaseActivity {
                 calendar.get(Calendar.DAY_OF_MONTH)
         );
 
-        // Set the start date of the picker to 1995-06-16, the earliest date available for the NASA API
+        // Set minimum and maximum date limits
         datePickerDialog.getDatePicker().setMinDate(new GregorianCalendar(1995, Calendar.JUNE, 16).getTimeInMillis());
-        // Set the end date of the picker to today's date
         datePickerDialog.getDatePicker().setMaxDate(calendar.getTimeInMillis());
 
         // Show the DatePickerDialog
         datePickerDialog.show();
     }
 
-    // Method to initiate fetching the NASA image
+    // Fetch the NASA image for the selected date
     private void fetchNasaImage(String date) {
         new FetchImageTask().execute(date);
     }
@@ -134,7 +159,7 @@ public class MainActivity extends BaseActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            progressBar.setVisibility(View.VISIBLE);
+            progressBar.setVisibility(View.VISIBLE);  // Show the progress bar while fetching the data
         }
 
         @Override
@@ -161,25 +186,24 @@ public class MainActivity extends BaseActivity {
 
         @Override
         protected void onPostExecute(NasaImage result) {
-            progressBar.setVisibility(View.GONE);
+            progressBar.setVisibility(View.GONE);  // Hide the progress bar when the task is complete
 
             if (result != null) {
-                nasaImages.add(result);
-                adapter.notifyDataSetChanged();
+                nasaImages.add(result);  // Add the fetched image to the list
+                adapter.notifyDataSetChanged();  // Notify the adapter of the data change
                 Toast.makeText(MainActivity.this, "Image fetched successfully!", Toast.LENGTH_SHORT).show();
             } else {
-                Snackbar.make(findViewById(R.id.listView), "Error fetching data", Snackbar.LENGTH_LONG)
+                Snackbar.make(recyclerView, "Error fetching data", Snackbar.LENGTH_LONG)
                         .setAction("Retry", v -> fetchNasaImage(pickDateButton.getText().toString()))
                         .show();
             }
         }
     }
 
-    // Method to display the selected NASA image details in a new activity
+    // Display the selected NASA image details in a new activity
     private void displayNasaImage(NasaImage image) {
         Intent intent = new Intent(MainActivity.this, ImageDetailActivity.class);
         intent.putExtra("image_url", image.getUrl());
-        intent.putExtra("image_hdurl", image.getHdurl());
         intent.putExtra("image_title", image.getTitle());
         intent.putExtra("image_date", image.getDate());
         intent.putExtra("image_explanation", image.getExplanation());

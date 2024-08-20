@@ -26,7 +26,6 @@ public class ImageDetailActivity extends BaseActivity {
     private TextView dateTextView;
     private TextView explanationTextView;
     private TextView copyrightTextView;
-    private Button backButton;
     private Button saveButton;
 
     private String imageUrl;
@@ -44,20 +43,16 @@ public class ImageDetailActivity extends BaseActivity {
         // Set up the toolbar using BaseActivity's method
         setUpToolbar(R.layout.activity_image_detail, true); // Passing true to show the back button
 
-
-
         // Initialize UI elements
         imageView = findViewById(R.id.imageView);
         titleTextView = findViewById(R.id.titleTextView);
         dateTextView = findViewById(R.id.dateTextView);
         explanationTextView = findViewById(R.id.explanationTextView);
         copyrightTextView = findViewById(R.id.copyrightTextView);
-//        backButton = findViewById(R.id.backButton);
         saveButton = findViewById(R.id.saveButton);
 
         // Retrieve data from the intent
         imageUrl = getIntent().getStringExtra("image_url");
-        imageHdUrl = getIntent().getStringExtra("image_hdurl");
         imageTitle = getIntent().getStringExtra("image_title");
         imageDate = getIntent().getStringExtra("image_date");
         imageExplanation = getIntent().getStringExtra("image_explanation");
@@ -71,9 +66,6 @@ public class ImageDetailActivity extends BaseActivity {
 
         // Load the image using Glide
         loadImage();
-
-        // Back Button: Navigate back to the previous activity
-//        backButton.setOnClickListener(v -> finish());
 
         // Save Button: Save the image to the device
         saveButton.setOnClickListener(v -> saveImageToDevice());
@@ -135,7 +127,7 @@ public class ImageDetailActivity extends BaseActivity {
         if (item.getItemId() == R.id.action_help) {
             // Show the help fragment specific to ImageDetailActivity
             showHelpFragment("This page displays information about your selected NASA image " +
-                    "You can save the image to your device by clicking the 'Save' button or return to the previous page using the 'Back' button.");
+                    "You can save the image to your device by clicking the 'Save' button.");
             return true;
         }
         return super.onOptionsItemSelected(item);

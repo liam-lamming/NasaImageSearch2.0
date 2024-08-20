@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Example setting: Theme preference -->
+    <ListPreference
+        android:key="theme_preference"
+        android:title="Theme"
+        android:summary="Choose your preferred theme"
+        android:entries="@array/theme_options"
+        android:entryValues="@array/theme_values"
+        android:defaultValue="light" />
+
+    <!-- Example setting: Notification toggle -->
+    <SwitchPreferenceCompat
+        android:key="notifications_preference"
+        android:title="Enable Notifications"
+        android:summary="Receive notifications for new images"
+        android:defaultValue="true" />
+
+</PreferenceScreen>

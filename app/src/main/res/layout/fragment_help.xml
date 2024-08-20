@@ -9,7 +9,7 @@
         android:id="@+id/help_text_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Help content goes here."
+        android:text="Change your personal settings"
         android:textSize="16sp"
         android:padding="8dp"
         android:textColor="@android:color/black"/>

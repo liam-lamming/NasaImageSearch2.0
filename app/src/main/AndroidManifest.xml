@@ -8,7 +8,7 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="NasaImageSearch2.0"
+        android:label="NASA Universe v1.6"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.NasaImageSearch20">
@@ -31,7 +31,10 @@
 
         <activity android:name=".SavedImagesActivity" />
         <activity android:name=".HelpActivity" />
-<activity android:name=".SettingsActivity"/>
+        <activity android:name=".SettingsActivity"/>
+<!--        Later usage -->
+        <activity android:name=".SearchResultsActivity" />
+
 
     </application>
 </manifest>
