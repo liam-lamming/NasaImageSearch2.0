@@ -29,15 +29,15 @@
         android:layout_below="@id/toolbar" />
 
     <!-- Help TextView -->
-    <TextView
-        android:id="@+id/activityMessage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:textColor="@android:color/black"
-        android:padding="16dp"
-        android:textSize="16sp"
-        android:visibility="gone"
-        android:text="This is a help message for using the Saved Images screen." />
+<!--    <TextView-->
+<!--        android:id="@+id/activityMessage"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_centerInParent="true"-->
+<!--        android:textColor="@android:color/black"-->
+<!--        android:padding="16dp"-->
+<!--        android:textSize="16sp"-->
+<!--        android:visibility="gone"-->
+<!--        android:text="This is a help message for using the Saved Images screen." />-->
 
 </RelativeLayout>

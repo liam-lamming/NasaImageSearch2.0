@@ -1,9 +1,52 @@
 <resources>
-    <string name="app_name">Recherche d'images de la NASA 2.0</string>
+    <string name="app_name">NASA Univers v1.6</string>
     <string name="header_title">Explorez le Cosmos</string>
-    <string name="landing_description">Découvrez des images époustouflantes de l'espace en sélectionnant une date.</string>
+    <string name="app_title">Bienvenue dans NASA Univers</string>
+
+    <string name="landing_description">Découvrez des images inspirantes de l'espace.</string>
     <string name="start_button_text">Commencer</string>
-    <string name="pick_a_date">Choisissez une date</string>
-    <string name="calendar_icon">Icône du calendrier</string>
-    <string name="search">Chercher</string>
+    <string name="select_a_date">Sélectionner une date</string>
+    <string name="saved_images">Images Enregistrées</string>
+    <string name="calendar_icon">Icône de Calendrier</string>
+    <string name="search">Rechercher</string>
+    <string name="enter_date">Entrez la date (aaaa-MM-jj)</string>
+    <string name="submit_date">Soumettre la Date</string>
+
+    <string name="info_message">Sélectionnez l'icône '?' dans la barre d'outils pour plus d'informations sur chaque page.</string>
+    <string name="info_message_checkbox">Ne plus afficher ce message</string>
+
+    <string name="close_button_text">Fermer</string>
+
+    <string name="settings_activity_help">Changez vos paramètres de thème et de notifications ici.</string>
+    <string name="saved_images_help">Affichez vos images enregistrées lors des recherches précédentes. Appuyez longuement pour supprimer des images.</string>
+    <string name="invalid_date_format">Format de date invalide. Veuillez utiliser aaaa-MM-jj.</string>
+
+    <string name="title_placeholder">Titre de Remplacement</string>
+    <string name="date_placeholder">Date de Remplacement</string>
+    <string name="explanation_placeholder">Explication de Remplacement</string>
+    <string name="copyright_placeholder">Droits d'Auteur de Remplacement</string>
+    <string name="save_button">Enregistrer</string>
+    <string name="image_deleted">Image Supprimée</string>
+    <string name="failed_delete_image">Échec de la suppression de l'image</string>
+    <string name="no_saved_images">Aucune Image Enregistrée</string>
+    <string name="delete_image_title">Supprimer l'Image ?</string>
+    <string name="delete_image_message">Êtes-vous sûr de vouloir supprimer cette image ?</string>
+    <string name="enable_notifications_text">Recevez des notifications pour les nouvelles images</string>
+    <string name="notification_title">Activer les Notifications</string>
+
+    <string name="theme_title">Thème</string>
+
+    <string name="theme_text">Choisissez votre thème préféré</string>
+
+
+    <!-- Theme Options -->
+    <string-array name="theme_options">
+        <item>Clair</item>
+        <item>Sombre</item>
+    </string-array>
+
+    <string-array name="theme_values">
+        <item>clair</item>
+        <item>sombre</item>
+    </string-array>
 </resources>

@@ -1,13 +1,45 @@
 <resources>
-    <string name="app_name">NASA Universe</string>
+    <string name="app_name">NASA Universe v1.6</string>
     <string name="header_title">Explore the Cosmos</string>
     <string name="app_title">Welcome to NASA Universe</string>
 
     <string name="landing_description">Discover awe-inspiring images of space.</string>
     <string name="start_button_text">Get Started</string>
     <string name="select_a_date">Select Date</string>
+    <string name="saved_images">Saved Images</string>
     <string name="calendar_icon">Calendar Icon</string>
     <string name="search">Search</string>
+    <string name="enter_date">Enter Date (yyyy-MM-dd)</string>
+    <string name="submit_date">Submit Date</string>
+
+    <string name="info_message">Select the \'?\' Icon in the toolbar for more information on each page.</string>
+    <string name="info_message_checkbox">Do not show this message again</string>
+
+    <string name="close_button_text">Close</string>
+<!--    Process below kept causing crashing that I couldn't figure out - simply allowing the string to exist caused parse/read errors for the entire xml file-->
+<!--    <string name="main_help">Select or enter a date to explore NASA images. You can also access your saved images by tapping 'Saved Images'</string>-->
+    <string name="settings_activity_help">Change your preferred theme and notification settings here.</string>
+    <string name="saved_images_help">View your saved images from past searches. Long press to delete images.</string>
+    <string name="invalid_date_format">Invalid date format. Please use yyyy-MM-dd.</string>
+
+    <string name="title_placeholder">Title Placeholder</string>
+    <string name="date_placeholder">Date Placeholder</string>
+    <string name="explanation_placeholder">Explanation Placeholder</string>
+    <string name="copyright_placeholder">Copyright Placeholder</string>
+    <string name="save_button">Save</string>
+    <string name="image_deleted">Image Deleted</string>
+    <string name="failed_delete_image">Failed to delete image</string>
+    <string name="no_saved_images">No Saved Images</string>
+    <string name="delete_image_title">Delete Image?</string>
+    <string name="delete_image_message">Are you sure you want to delete this image?</string>
+    <string name="enable_notifications_text">Receive notifications for new images</string>
+    <string name="notification_title">Enable Notifications</string>
+
+    <string name="theme_title">Theme</string>
+
+    <string name="theme_text">Choose your preferred theme</string>
+
+
     <!-- Theme Options -->
     <string-array name="theme_options">
         <item>Light</item>
@@ -18,6 +50,5 @@
         <item>light</item>
         <item>dark</item>
     </string-array>
-    <string name="search_hint">Search images...</string>
 
 </resources>

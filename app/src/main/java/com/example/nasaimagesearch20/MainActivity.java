@@ -1,7 +1,9 @@
 package com.example.nasaimagesearch20;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
@@ -18,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -55,6 +58,19 @@ public class MainActivity extends BaseActivity {
 
         // Set up layout and toolbar
         setUpToolbar(R.layout.activity_main, false);
+
+        // Get SharedPreferences
+        SharedPreferences preferences = getSharedPreferences("AppPreferences", Context.MODE_PRIVATE);
+        boolean showInfoMessage = preferences.getBoolean("show_info_message", true);
+
+        // Check if the info message should be shown
+        if (showInfoMessage) {
+            // Show the info message fragment
+            InfoMessageFragment infoMessageFragment = new InfoMessageFragment();
+            infoMessageFragment.show(getSupportFragmentManager(), "InfoMessageFragment");
+        }
+
+
 
         // Initialize UI elements
         pickDateButton = findViewById(R.id.btnPickDate);
@@ -150,6 +166,9 @@ public class MainActivity extends BaseActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.action_help) {
+//            causing error crashes in conjunction w/ string value
+//            String helpMessage = getString(R.string.main_activity_help);
+
             showHelpFragment("Select or enter a date to explore NASA images. You can also access your saved images by tapping 'Saved Images'");
             return true;
         }
@@ -163,7 +182,7 @@ public class MainActivity extends BaseActivity {
             fetchNasaImage(manualDate);  // Fetch the NASA image
         } else {
             // Show error if the date is not valid and anchor the Snackbar to the EditText
-            Snackbar.make(editTextManualDate, "Invalid date format. Please use yyyy-MM-dd.", Snackbar.LENGTH_LONG)
+            Snackbar.make(editTextManualDate, getString(R.string.invalid_date_format), Snackbar.LENGTH_LONG)
                     .setAnchorView(editTextManualDate)
                     .show();
         }

@@ -44,8 +44,8 @@ public class SavedImagesActivity extends BaseActivity {
         savedImagesGridView.setOnItemLongClickListener((parent, view, position, id) -> {
             // Confirm before deleting the selected image
             new AlertDialog.Builder(SavedImagesActivity.this)
-                    .setTitle("Delete Image")
-                    .setMessage("Are you sure you want to delete this image?")
+                    .setTitle(getString(R.string.delete_image_title))
+                    .setMessage(getString(R.string.delete_image_message))
                     .setPositiveButton(android.R.string.yes, (dialog, which) -> {
                         // Delete the selected image
                         deleteImage(position);
@@ -70,7 +70,7 @@ public class SavedImagesActivity extends BaseActivity {
         }
 
         if (savedImageFiles.isEmpty()) {
-            Toast.makeText(this, "No saved images", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.no_saved_images), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -81,9 +81,9 @@ public class SavedImagesActivity extends BaseActivity {
             if (file.delete()) {
                 savedImageFiles.remove(position);
                 adapter.notifyDataSetChanged();
-                Toast.makeText(this, "Image deleted", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.image_deleted), Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(this, "Failed to delete image", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.failed_delete_image), Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -92,8 +92,10 @@ public class SavedImagesActivity extends BaseActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.action_help) {
+
+            String helpMessage= getString(R.string.saved_images_help);
             // Show the help fragment specific to SavedImagesActivity
-            showHelpFragment("This page displays all your saved NASA images. You can view the images by clicking on them, or delete them by holding the image and confirming the deletion.");
+            showHelpFragment(helpMessage);
             return true;
         }
         return super.onOptionsItemSelected(item);

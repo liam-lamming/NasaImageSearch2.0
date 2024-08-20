@@ -1,0 +1,29 @@
+<!-- res/layout/fragment_info_message.xml -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/info_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/info_message"
+        android:textSize="18sp" />
+
+    <CheckBox
+        android:id="@+id/do_not_show_checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/info_message"
+        android:layout_marginTop="16dp"
+        android:text="@string/info_message_checkbox" />
+
+    <Button
+        android:id="@+id/close_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/do_not_show_checkbox"
+        android:layout_marginTop="16dp"
+        android:text="@string/close_button_text" />
+</RelativeLayout>
