@@ -10,6 +10,6 @@ public class HelpActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_help);
 
-        // Display help content relevant to the current page
+
     }
 }

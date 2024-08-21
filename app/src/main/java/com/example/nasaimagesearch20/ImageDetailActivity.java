@@ -125,7 +125,7 @@ public class ImageDetailActivity extends BaseActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.action_help) {
-            // Show the help fragment specific to ImageDetailActivity
+            // Show the help fragment specific to ImageDetailActivity - App crashing when string enabled - unsure why
             showHelpFragment("This page displays information about your selected NASA image " +
                     "You can save the image to your device by clicking the 'Save' button.");
             return true;

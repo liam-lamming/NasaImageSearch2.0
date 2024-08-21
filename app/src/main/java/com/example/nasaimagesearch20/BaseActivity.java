@@ -29,7 +29,7 @@ public class BaseActivity extends AppCompatActivity {
             setSupportActionBar(toolbar);
         }
 
-        // Enable the back button in the toolbar if required
+        // Enable the back button in the toolbar
         if (showBackButton) {
             ActionBar actionBar = getSupportActionBar();
             if (actionBar != null) {
@@ -79,7 +79,7 @@ public class BaseActivity extends AppCompatActivity {
         // Handle menu item selections
         int id = item.getItemId();
         if (id == android.R.id.home) {
-            // Handle the back button press in the toolbar
+            // Handle the button press in the toolbar
             onBackPressed();
             return true;
         } else if (id == R.id.action_help) {
@@ -105,7 +105,7 @@ public class BaseActivity extends AppCompatActivity {
         helpFragment.show(fragmentManager, "HelpFragment");
     }
 
-    // Method to open settings (modify this to open your actual settings)
+    // Method to open settings
     private void openSettings() {
         Intent intent = new Intent(this, SettingsActivity.class);
         startActivity(intent);
